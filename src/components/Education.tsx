@@ -22,13 +22,14 @@ export function Education() {
 
         <div className="grid md:grid-cols-3 gap-6">
           {articles.map((article, index) => (
-            <motion.div
+            <motion.a
               key={index}
+              href={`#blog-${article.slug}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group cursor-pointer"
+              className="group cursor-pointer block"
             >
               <div className="glass-panel p-6 rounded-2xl h-full hover:border-primary/30 transition-all duration-300">
                 <div className="flex items-center justify-between mb-4">
@@ -46,11 +47,11 @@ export function Education() {
                 <p className="text-gray-400 text-sm leading-relaxed mb-6">
                   {article.description}
                 </p>
-                <a href={`#blog-${article.slug}`} className="flex items-center gap-2 text-sm font-medium text-primary opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+                <span className="flex items-center gap-2 text-sm font-medium text-primary opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
                   Ler artigo <ArrowRight className="w-4 h-4" />
-                </a>
+                </span>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>
