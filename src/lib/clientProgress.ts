@@ -228,6 +228,7 @@ const CLIENT_FILES: Record<ClientSlug, string[]> = {
     'IDP_Camara_Municipal_Morro_do_Chapeu_BA.xlsx',
     'PGP_Camara_Municipal_Morro_do_Chapeu_BA.docx',
     'PPDP_Camara_Municipal_Morro_do_Chapeu_BA.docx',
+    'Publicado_Encarregado_Camara_Municipal_Morro_do_Chapeu_BA.pdf',
     'RIPD_Camara_Municipal_Morro_do_Chapeu_BA.docx',
   ],
   'cm-rj-ba': [
@@ -235,6 +236,7 @@ const CLIENT_FILES: Record<ClientSlug, string[]> = {
     'IDP_Camara_Municipal_Riachao_do_Jacuipe_BA.xlsx',
     'PGP_Camara_Municipal_Riachao_do_Jacuipe_BA.docx',
     'PPDP_Camara_Municipal_Riachao_do_Jacuipe_BA.docx',
+    'Publicado_Encarregado_Camara_Municipal_Riachao_do_Jacuipe_BA.pdf',
     'RIPD_Camara_Municipal_Riachao_do_Jacuipe_BA.docx',
   ],
   'cm-ib-ba': [
