@@ -9,6 +9,8 @@ import { CTA } from './components/CTA';
 import { Footer } from './components/Footer';
 import { ScheduleMeeting } from './components/ScheduleMeeting';
 import { Blog } from './components/Blog';
+import { ClientPortal } from './components/ClientPortal';
+import { ClientSlug } from './lib/clientProgress';
 
 const DashboardImpact = lazy(() =>
   import('./components/DashboardImpact').then((module) => ({
@@ -41,6 +43,10 @@ function SectionFallback({ id }: { id: string }) {
 export default function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash);
 
+  const normalizedPath = window.location.pathname.replace(/\/$/, '') || '/';
+  const clientSlug = normalizedPath.slice(1) as ClientSlug;
+  const isClientPath = ['caw', 'cm-mc-ba', 'cm-rj-ba', 'cm-ib-ba'].includes(clientSlug);
+
   useEffect(() => {
     const handleHashChange = () => {
       setCurrentHash(window.location.hash);
@@ -52,6 +58,10 @@ export default function App() {
 
   const isSchedulePage = currentHash === '#agendamento';
   const isBlogPage = currentHash.startsWith('#blog');
+
+  if (isClientPath) {
+    return <ClientPortal clientSlug={clientSlug} />;
+  }
 
   return (
     <div id="topo" className="min-h-screen bg-background text-gray-100 selection:bg-primary/30 selection:text-white">
