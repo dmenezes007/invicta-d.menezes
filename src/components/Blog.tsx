@@ -35,8 +35,8 @@ export function Blog() {
             Blog <span className="text-gradient">D.Menezes Privacy</span>
           </h1>
           <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-            Leia os artigos completos sobre LGPD, governanca de dados e prevencao de incidentes
-            aplicados ao setor publico.
+            Acesse os artigos sobre LGPD, governanca de dados e prevenção de incidentes
+            aplicados ao setor público.
           </p>
         </div>
 
