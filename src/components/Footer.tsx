@@ -36,6 +36,7 @@ export function Footer() {
               <li><a href="#metodologia" className="hover:text-primary transition-colors">Metodologia</a></li>
               <li><a href="#impacto" className="hover:text-primary transition-colors">Casos de Sucesso</a></li>
               <li><a href="#blog" className="hover:text-primary transition-colors">Blog</a></li>
+              <li><a href="/admin" className="hover:text-primary transition-colors">Painel do Administrador</a></li>
             </ul>
           </div>
           
@@ -52,6 +53,7 @@ export function Footer() {
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
           <p>© {new Date().getFullYear()} D.Menezes Privacy. Todos os direitos reservados.</p>
           <div className="flex gap-6">
+            <a href="/admin" className="hover:text-white transition-colors">Painel do Administrador</a>
             <a href="mailto:davison.menezes@gmail.com?subject=Solicita%C3%A7%C3%A3o%20-%20Pol%C3%ADtica%20de%20Privacidade" className="hover:text-white transition-colors">Política de Privacidade</a>
             <a href="mailto:davison.menezes@gmail.com?subject=Solicita%C3%A7%C3%A3o%20-%20Termos%20de%20Uso" className="hover:text-white transition-colors">Termos de Uso</a>
           </div>

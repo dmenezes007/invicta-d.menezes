@@ -51,6 +51,12 @@ export function Navbar() {
             </a>
           ))}
           <a
+            href="/admin"
+            className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
+          >
+            Painel do Administrador
+          </a>
+          <a
             href="#contato"
             className="px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-medium transition-all hover:border-primary/50"
           >
@@ -90,6 +96,13 @@ export function Navbar() {
               {link.name}
             </a>
           ))}
+          <a
+            href="/admin"
+            className="text-base font-medium text-gray-300 hover:text-white py-2"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Painel do Administrador
+          </a>
           <a
             href="#contato"
             onClick={() => setMobileMenuOpen(false)}
