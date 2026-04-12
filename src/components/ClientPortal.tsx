@@ -53,6 +53,20 @@ function getIndicatorColor(progress: number): string {
   return PROGRESS_COLORS[colorIndex];
 }
 
+function getElaboratedDocumentLabel(fileName: string, index: number, total: number): string {
+  if (total <= 1) {
+    return 'Documento elaborado';
+  }
+
+  const match = fileName.match(/PRO-\d{3}/i);
+  if (match) {
+    return `Documento elaborado (${match[0].toUpperCase()})`;
+  }
+
+  const sequence = String(index + 1).padStart(3, '0');
+  return `Documento elaborado (PRO-${sequence})`;
+}
+
 export function ClientPortal({ clientSlug }: ClientPortalProps) {
   const client = CLIENTS[clientSlug];
   const focalPoint = FOCAL_POINTS[clientSlug];
@@ -206,7 +220,7 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
 
                               {document.available ? (
                                 <div className="mt-2 space-y-1.5">
-                                  {document.files.map((file) => (
+                                  {document.files.map((file, index) => (
                                     <a
                                       key={file.fileName}
                                       href={file.downloadUrl}
@@ -214,7 +228,7 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
                                       className="inline-flex items-center text-sm font-semibold transition-colors"
                                       style={{ color: STATUS_GREEN }}
                                     >
-                                      Documento elaborado
+                                      {getElaboratedDocumentLabel(file.fileName, index, document.files.length)}
                                     </a>
                                   ))}
                                 </div>
