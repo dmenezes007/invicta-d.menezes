@@ -20,12 +20,14 @@ type StageDefinition = {
 export type ClientFile = {
   fileName: string;
   downloadUrl: string;
+  status: 'elaborated' | 'published';
 };
 
 export type DocumentStatus = {
   key: string;
   title: string;
   available: boolean;
+  status: 'planned' | 'elaborated' | 'published';
   files: ClientFile[];
 };
 
@@ -251,6 +253,20 @@ function toDownloadUrl(clientSlug: ClientSlug, fileName: string): string {
   return `/clients/${clientSlug}/${encodeURIComponent(fileName)}`;
 }
 
+function getFileStatus(fileName: string): 'elaborated' | 'published' | null {
+  const normalized = normalizeText(fileName);
+
+  if (normalized.endsWith('.pdf')) {
+    return 'published';
+  }
+
+  if (normalized.endsWith('.docx') || normalized.endsWith('.xlsx')) {
+    return 'elaborated';
+  }
+
+  return null;
+}
+
 export function getClientStages(clientSlug: ClientSlug): StageStatus[] {
   const clientFiles = CLIENT_FILES[clientSlug];
 
@@ -264,15 +280,32 @@ export function getClientStages(clientSlug: ClientSlug): StageStatus[] {
           const normalized = normalizeText(fileName);
           return document.matchers.every((matcher) => normalized.includes(normalizeText(matcher)));
         })
-        .map((fileName) => ({
-          fileName,
-          downloadUrl: toDownloadUrl(clientSlug, fileName),
-        }));
+        .map((fileName) => {
+          const status = getFileStatus(fileName);
+
+          if (!status) {
+            return null;
+          }
+
+          return {
+            fileName,
+            downloadUrl: toDownloadUrl(clientSlug, fileName),
+            status,
+          };
+        })
+        .filter((file): file is ClientFile => file !== null);
+
+      const status = files.some((file) => file.status === 'published')
+        ? 'published'
+        : files.some((file) => file.status === 'elaborated')
+          ? 'elaborated'
+          : 'planned';
 
       return {
         key: document.key,
         title: document.title,
         available: files.length > 0,
+        status,
         files,
       };
     }),
@@ -281,15 +314,25 @@ export function getClientStages(clientSlug: ClientSlug): StageStatus[] {
 
 export function getClientProgress(clientSlug: ClientSlug): number {
   const stages = getClientStages(clientSlug);
-  const totalDocuments = stages.reduce((acc, stage) => acc + stage.documents.length, 0);
-  const availableDocuments = stages.reduce(
-    (acc, stage) => acc + stage.documents.filter((doc) => doc.available).length,
-    0,
+  const documentProgressUnits = stages.flatMap((stage) =>
+    stage.documents.map((document) => {
+      switch (document.status) {
+        case 'published':
+          return 1;
+        case 'elaborated':
+          return 0.5;
+        default:
+          return 0;
+      }
+    }),
   );
+
+  const totalDocuments = documentProgressUnits.length;
+  const completedUnits = documentProgressUnits.reduce((sum, current) => sum + current, 0);
 
   if (totalDocuments === 0) {
     return 0;
   }
 
-  return Math.round((availableDocuments / totalDocuments) * 100);
+  return Math.round((completedUnits / totalDocuments) * 100);
 }

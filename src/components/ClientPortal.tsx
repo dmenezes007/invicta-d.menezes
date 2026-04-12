@@ -1,5 +1,5 @@
 import { FormEvent, useMemo, useState } from 'react';
-import { Lock, CircleCheck, CircleX } from 'lucide-react';
+import { Lock, CircleCheck, CircleX, CircleAlert } from 'lucide-react';
 import { CLIENTS, ClientSlug, getClientProgress, getClientStages } from '../lib/clientProgress';
 import { Navbar } from './Navbar';
 
@@ -22,6 +22,7 @@ const PROGRESS_COLORS = [
 ];
 
 const STATUS_RED = '#ED2938';
+const STATUS_YELLOW = '#FFAA1C';
 const STATUS_GREEN = '#006B3E';
 
 const FOCAL_POINTS: Record<ClientSlug, FocalPoint> = {
@@ -53,18 +54,31 @@ function getIndicatorColor(progress: number): string {
   return PROGRESS_COLORS[colorIndex];
 }
 
-function getElaboratedDocumentLabel(fileName: string, index: number, total: number): string {
+function getDocumentLabel(fileName: string, status: 'elaborated' | 'published', index: number, total: number): string {
+  const baseLabel = status === 'published' ? 'Documento publicado' : 'Documento elaborado';
+
   if (total <= 1) {
-    return 'Documento elaborado';
+    return baseLabel;
   }
 
   const match = fileName.match(/PRO-\d{3}/i);
   if (match) {
-    return `Documento elaborado (${match[0].toUpperCase()})`;
+    return `${baseLabel} (${match[0].toUpperCase()})`;
   }
 
   const sequence = String(index + 1).padStart(3, '0');
-  return `Documento elaborado (PRO-${sequence})`;
+  return `${baseLabel} (PRO-${sequence})`;
+}
+
+function getCardAccent(documentStatus: 'planned' | 'elaborated' | 'published'): string {
+  switch (documentStatus) {
+    case 'published':
+      return STATUS_GREEN;
+    case 'elaborated':
+      return STATUS_YELLOW;
+    default:
+      return STATUS_RED;
+  }
 }
 
 export function ClientPortal({ clientSlug }: ClientPortalProps) {
@@ -201,20 +215,24 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
                       {stage.documents.map((document) => (
                         <div
                           key={document.key}
-                          className={`rounded-xl border px-4 py-3 ${
-                            document.available
-                              ? 'border-white/15 bg-surface-light/70'
-                              : 'border-white/10 bg-gray-500/10 text-gray-400'
-                          }`}
+                          className="rounded-xl border px-4 py-3 bg-surface-light/70"
+                          style={{
+                            borderColor:
+                              document.status === 'planned'
+                                ? 'rgba(255, 255, 255, 0.10)'
+                                : `${getCardAccent(document.status)}55`,
+                          }}
                         >
                           <div className="flex items-start gap-3">
-                            {document.available ? (
+                            {document.status === 'published' ? (
                               <CircleCheck className="w-5 h-5 mt-0.5 shrink-0" style={{ color: STATUS_GREEN }} />
+                            ) : document.status === 'elaborated' ? (
+                              <CircleAlert className="w-5 h-5 mt-0.5 shrink-0" style={{ color: STATUS_YELLOW }} />
                             ) : (
                               <CircleX className="w-5 h-5 mt-0.5 shrink-0" style={{ color: STATUS_RED }} />
                             )}
                             <div className="min-w-0 w-full">
-                              <p className={`font-semibold leading-tight ${document.available ? 'text-gray-100' : 'text-gray-400'}`}>
+                              <p className="font-semibold leading-tight text-gray-100">
                                 {document.title}
                               </p>
 
@@ -226,9 +244,9 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
                                       href={file.downloadUrl}
                                       download
                                       className="inline-flex items-center text-sm font-semibold transition-colors"
-                                      style={{ color: STATUS_GREEN }}
+                                      style={{ color: file.status === 'published' ? STATUS_GREEN : STATUS_YELLOW }}
                                     >
-                                      {getElaboratedDocumentLabel(file.fileName, index, document.files.length)}
+                                      {getDocumentLabel(file.fileName, file.status, index, document.files.length)}
                                     </a>
                                   ))}
                                 </div>
