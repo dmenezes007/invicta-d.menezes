@@ -7,6 +7,11 @@ type ClientPortalProps = {
   clientSlug: ClientSlug;
 };
 
+type FocalPoint = {
+  name: string;
+  contact: string;
+};
+
 const PROGRESS_COLORS = [
   '#ED2938',
   '#FF8C01',
@@ -15,6 +20,28 @@ const PROGRESS_COLORS = [
   '#006B3E',
   '#024E1B',
 ];
+
+const STATUS_RED = '#ED2938';
+const STATUS_GREEN = '#006B3E';
+
+const FOCAL_POINTS: Record<ClientSlug, FocalPoint> = {
+  'caw': {
+    name: 'Mirian Ayres',
+    contact: '(21) 3613-3800',
+  },
+  'cm-mc-ba': {
+    name: 'Flávia Oliveira de Souza',
+    contact: '(74) 9910-5860',
+  },
+  'cm-rj-ba': {
+    name: 'Roberto',
+    contact: '(75) 8172-2107',
+  },
+  'cm-ib-ba': {
+    name: 'Maiane Santos',
+    contact: '(73) 8133-1100',
+  },
+};
 
 function getProgressPosition(progress: number): number {
   return Math.min(100, Math.max(0, progress));
@@ -28,6 +55,7 @@ function getIndicatorColor(progress: number): string {
 
 export function ClientPortal({ clientSlug }: ClientPortalProps) {
   const client = CLIENTS[clientSlug];
+  const focalPoint = FOCAL_POINTS[clientSlug];
   const [password, setPassword] = useState('');
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -110,6 +138,18 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
             <p className="text-gray-400">Painel de evolução dos documentos oficiais de conformidade.</p>
           </header>
 
+          <div className="mb-6 md:mb-8 rounded-2xl border border-white/10 bg-surface/70 px-5 py-4 md:px-6 md:py-5">
+            <p className="text-sm uppercase tracking-wide text-gray-400 mb-2">Ponto Focal</p>
+            <div className="grid gap-2 md:grid-cols-2">
+              <p className="text-gray-200">
+                <span className="font-semibold">Nome:</span> {focalPoint.name}
+              </p>
+              <p className="text-gray-200">
+                <span className="font-semibold">Contato:</span> {focalPoint.contact}
+              </p>
+            </div>
+          </div>
+
           <section className="glass-panel rounded-2xl border border-white/10 p-5 md:p-8">
             <div className="grid grid-cols-1 lg:grid-cols-[120px_1fr] gap-6 md:gap-8">
               <div className="relative min-h-[560px] hidden lg:flex items-start justify-center">
@@ -119,11 +159,11 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
                     className="absolute -left-20 -translate-y-1/2 flex items-center gap-3"
                     style={{ top: `${progressPosition}%` }}
                   >
-                    <span className="orbitron-bold text-lg leading-none" style={{ color: indicatorColor }}>
+                    <span className="orbitron-bold text-base leading-none" style={{ color: indicatorColor }}>
                       {progress}%
                     </span>
                     <span
-                      className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px]"
+                      className="w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[12px]"
                       style={{ borderLeftColor: indicatorColor }}
                     />
                   </div>
@@ -133,7 +173,7 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
               <div className="space-y-5 md:space-y-6">
                 <div className="lg:hidden mb-2 flex items-center gap-3">
                   <div className="h-3 flex-1 rounded-full overflow-hidden" style={{ background: gradient }} />
-                  <span className="orbitron-bold" style={{ color: indicatorColor }}>
+                  <span className="orbitron-bold text-sm" style={{ color: indicatorColor }}>
                     {progress}%
                   </span>
                 </div>
@@ -155,9 +195,9 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
                         >
                           <div className="flex items-start gap-3">
                             {document.available ? (
-                              <CircleCheck className="w-5 h-5 mt-0.5 text-[#22c55e] shrink-0" />
+                              <CircleCheck className="w-5 h-5 mt-0.5 shrink-0" style={{ color: STATUS_GREEN }} />
                             ) : (
-                              <CircleX className="w-5 h-5 mt-0.5 text-gray-500 shrink-0" />
+                              <CircleX className="w-5 h-5 mt-0.5 shrink-0" style={{ color: STATUS_RED }} />
                             )}
                             <div className="min-w-0 w-full">
                               <p className={`font-semibold leading-tight ${document.available ? 'text-gray-100' : 'text-gray-400'}`}>
@@ -171,14 +211,17 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
                                       key={file.fileName}
                                       href={file.downloadUrl}
                                       download
-                                      className="inline-flex items-center text-sm text-[#8ddcff] hover:text-[#b9edff] transition-colors break-all"
+                                      className="inline-flex items-center text-sm font-semibold transition-colors"
+                                      style={{ color: STATUS_GREEN }}
                                     >
-                                      {file.fileName}
+                                      Documento elaborado
                                     </a>
                                   ))}
                                 </div>
                               ) : (
-                                <p className="mt-2 text-sm text-gray-500">Documento previsto para elaboração.</p>
+                                <p className="mt-2 text-sm" style={{ color: STATUS_RED }}>
+                                  Documento previsto para elaboração
+                                </p>
                               )}
                             </div>
                           </div>

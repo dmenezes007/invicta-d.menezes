@@ -10,6 +10,7 @@ import { Footer } from './components/Footer';
 import { ScheduleMeeting } from './components/ScheduleMeeting';
 import { Blog } from './components/Blog';
 import { ClientPortal } from './components/ClientPortal';
+import { AdminPanel } from './components/AdminPanel';
 import { ClientSlug } from './lib/clientProgress';
 
 const DashboardImpact = lazy(() =>
@@ -44,6 +45,7 @@ export default function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash);
 
   const normalizedPath = window.location.pathname.replace(/\/$/, '') || '/';
+  const isAdminPath = normalizedPath === '/admin';
   const clientSlug = normalizedPath.slice(1) as ClientSlug;
   const isClientPath = ['caw', 'cm-mc-ba', 'cm-rj-ba', 'cm-ib-ba'].includes(clientSlug);
 
@@ -58,6 +60,10 @@ export default function App() {
 
   const isSchedulePage = currentHash === '#agendamento';
   const isBlogPage = currentHash.startsWith('#blog');
+
+  if (isAdminPath) {
+    return <AdminPanel />;
+  }
 
   if (isClientPath) {
     return <ClientPortal clientSlug={clientSlug} />;
