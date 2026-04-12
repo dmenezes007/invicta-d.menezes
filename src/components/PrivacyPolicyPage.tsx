@@ -8,7 +8,6 @@ export function PrivacyPolicyPage() {
       <main className="px-6 pt-28 pb-16 md:pt-32">
         <div className="max-w-4xl mx-auto">
           <header className="mb-10">
-            <p className="text-sm uppercase tracking-wide text-gray-400 mb-3">D.MenezesPrivacy</p>
             <h1 className="text-3xl md:text-4xl font-bold mb-4">Política de Privacidade</h1>
             <p className="text-gray-300">
               Esta Política descreve como o D.MenezesPrivacy coleta, utiliza, compartilha e protege dados pessoais no

@@ -8,7 +8,6 @@ export function TermsOfUsePage() {
       <main className="px-6 pt-28 pb-16 md:pt-32">
         <div className="max-w-4xl mx-auto">
           <header className="mb-10">
-            <p className="text-sm uppercase tracking-wide text-gray-400 mb-3">D.MenezesPrivacy</p>
             <h1 className="text-3xl md:text-4xl font-bold mb-4">Termos de Uso</h1>
             <p className="text-gray-300">
               Estes Termos de Uso regulam o acesso e a utilização dos serviços, canais de comunicação, conteúdos,
