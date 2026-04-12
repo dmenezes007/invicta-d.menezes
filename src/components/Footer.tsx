@@ -35,7 +35,7 @@ export function Footer() {
               <li><a href="#topo" className="hover:text-primary transition-colors">Sobre Nós</a></li>
               <li><a href="#metodologia" className="hover:text-primary transition-colors">Metodologia</a></li>
               <li><a href="#impacto" className="hover:text-primary transition-colors">Casos de Sucesso</a></li>
-              <li><a href="#conteudo" className="hover:text-primary transition-colors">Blog</a></li>
+              <li><a href="#blog" className="hover:text-primary transition-colors">Blog</a></li>
             </ul>
           </div>
           

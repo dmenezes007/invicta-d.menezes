@@ -8,6 +8,7 @@ import { Methodology } from './components/Methodology';
 import { CTA } from './components/CTA';
 import { Footer } from './components/Footer';
 import { ScheduleMeeting } from './components/ScheduleMeeting';
+import { Blog } from './components/Blog';
 
 const DashboardImpact = lazy(() =>
   import('./components/DashboardImpact').then((module) => ({
@@ -50,6 +51,7 @@ export default function App() {
   }, []);
 
   const isSchedulePage = currentHash === '#agendamento';
+  const isBlogPage = currentHash.startsWith('#blog');
 
   return (
     <div id="topo" className="min-h-screen bg-background text-gray-100 selection:bg-primary/30 selection:text-white">
@@ -57,6 +59,8 @@ export default function App() {
       <main>
         {isSchedulePage ? (
           <ScheduleMeeting />
+        ) : isBlogPage ? (
+          <Blog />
         ) : (
           <>
             <Hero />
