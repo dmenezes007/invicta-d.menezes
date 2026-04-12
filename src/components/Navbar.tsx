@@ -16,10 +16,10 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Soluções', href: '#solucoes' },
-    { name: 'Impacto', href: '#impacto' },
-    { name: 'Metodologia', href: '#metodologia' },
-    { name: 'Conteúdo', href: '#conteudo' },
+    { name: 'Soluções', href: '/#solucoes' },
+    { name: 'Impacto', href: '/#impacto' },
+    { name: 'Metodologia', href: '/#metodologia' },
+    { name: 'Conteúdo', href: '/#conteudo' },
   ];
 
   return (
@@ -30,7 +30,7 @@ export function Navbar() {
       )}
     >
       <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
-        <a href="#topo" className="flex items-center gap-2" aria-label="Voltar ao topo da página">
+        <a href="/" className="flex items-center gap-2" aria-label="Ir para a página inicial">
           <div className="bg-primary/20 p-2 rounded-lg border border-primary/30">
             <Shield className="w-6 h-6 text-primary" />
           </div>
@@ -57,7 +57,7 @@ export function Navbar() {
             Painel do Administrador
           </a>
           <a
-            href="#contato"
+            href="/#contato"
             className="px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-medium transition-all hover:border-primary/50"
           >
             Falar com Especialista
@@ -104,7 +104,7 @@ export function Navbar() {
             Painel do Administrador
           </a>
           <a
-            href="#contato"
+            href="/#contato"
             onClick={() => setMobileMenuOpen(false)}
             className="px-5 py-3 rounded-lg bg-primary text-white text-center font-medium mt-2"
           >
