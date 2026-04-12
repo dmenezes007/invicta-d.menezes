@@ -32,7 +32,7 @@ export function Blog() {
 
         <div className="text-center mb-14">
           <h1 className="text-4xl md:text-5xl font-bold mb-5">
-            Blog <span className="text-gradient">D.Menezes Privacy</span>
+            Blog
           </h1>
           <p className="text-gray-400 text-lg max-w-3xl mx-auto">
             Acesse os artigos sobre LGPD, governanca de dados e prevenção de incidentes
