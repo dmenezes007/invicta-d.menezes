@@ -239,15 +239,22 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
                               {document.available ? (
                                 <div className="mt-2 space-y-1.5">
                                   {document.files.map((file, index) => (
-                                    <a
-                                      key={file.fileName}
-                                      href={file.downloadUrl}
-                                      download
-                                      className="inline-flex items-center text-sm font-semibold transition-colors"
-                                      style={{ color: file.status === 'published' ? STATUS_GREEN : STATUS_YELLOW }}
-                                    >
-                                      {getDocumentLabel(file.fileName, file.status, index, document.files.length)}
-                                    </a>
+                                    (() => {
+                                      const sameStatusFiles = document.files.filter((candidate) => candidate.status === file.status);
+                                      const sameStatusIndex = sameStatusFiles.findIndex((candidate) => candidate.fileName === file.fileName);
+
+                                      return (
+                                        <a
+                                          key={file.fileName}
+                                          href={file.downloadUrl}
+                                          download
+                                          className="inline-flex items-center text-sm font-semibold transition-colors"
+                                          style={{ color: file.status === 'published' ? STATUS_GREEN : STATUS_YELLOW }}
+                                        >
+                                          {getDocumentLabel(file.fileName, file.status, sameStatusIndex, sameStatusFiles.length)}
+                                        </a>
+                                      );
+                                    })()
                                   ))}
                                 </div>
                               ) : (
