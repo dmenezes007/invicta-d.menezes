@@ -1,5 +1,5 @@
 import { FormEvent, useMemo, useState } from 'react';
-import { FileText, Lock, Download, CircleX } from 'lucide-react';
+import { Lock, CircleCheck, CircleX } from 'lucide-react';
 import { CLIENTS, ClientSlug, getClientProgress, getClientStages } from '../lib/clientProgress';
 
 type ClientPortalProps = {
@@ -19,6 +19,12 @@ function getProgressPosition(progress: number): number {
   return Math.min(100, Math.max(0, progress));
 }
 
+function getIndicatorColor(progress: number): string {
+  const normalized = Math.min(100, Math.max(0, progress)) / 100;
+  const colorIndex = Math.min(PROGRESS_COLORS.length - 1, Math.floor(normalized * PROGRESS_COLORS.length));
+  return PROGRESS_COLORS[colorIndex];
+}
+
 export function ClientPortal({ clientSlug }: ClientPortalProps) {
   const client = CLIENTS[clientSlug];
   const [password, setPassword] = useState('');
@@ -28,6 +34,7 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
   const stages = useMemo(() => getClientStages(clientSlug), [clientSlug]);
   const progress = useMemo(() => getClientProgress(clientSlug), [clientSlug]);
   const progressPosition = getProgressPosition(progress);
+  const indicatorColor = getIndicatorColor(progress);
 
   const gradient = `linear-gradient(180deg, ${PROGRESS_COLORS.join(', ')})`;
 
@@ -106,8 +113,13 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
                   className="absolute -left-16 -translate-y-1/2 flex items-center gap-2"
                   style={{ top: `${progressPosition}%` }}
                 >
-                  <span className="text-[#FFAA1C] font-bold text-lg leading-none">{progress}%</span>
-                  <span className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px] border-l-[#FFAA1C]" />
+                  <span className="orbitron-bold text-lg leading-none" style={{ color: indicatorColor }}>
+                    {progress}%
+                  </span>
+                  <span
+                    className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px]"
+                    style={{ borderLeftColor: indicatorColor }}
+                  />
                 </div>
               </div>
             </div>
@@ -115,7 +127,9 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
             <div className="space-y-5 md:space-y-6">
               <div className="lg:hidden mb-2 flex items-center gap-3">
                 <div className="h-3 flex-1 rounded-full overflow-hidden" style={{ background: gradient }} />
-                <span className="text-[#FFAA1C] font-bold">{progress}%</span>
+                <span className="orbitron-bold" style={{ color: indicatorColor }}>
+                  {progress}%
+                </span>
               </div>
 
               {stages.map((stage) => (
@@ -135,7 +149,7 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
                       >
                         <div className="flex items-start gap-3">
                           {document.available ? (
-                            <FileText className="w-5 h-5 mt-0.5 text-[#e8edf2] shrink-0" />
+                            <CircleCheck className="w-5 h-5 mt-0.5 text-[#22c55e] shrink-0" />
                           ) : (
                             <CircleX className="w-5 h-5 mt-0.5 text-gray-500 shrink-0" />
                           )}
@@ -151,9 +165,8 @@ export function ClientPortal({ clientSlug }: ClientPortalProps) {
                                     key={file.fileName}
                                     href={file.downloadUrl}
                                     download
-                                    className="inline-flex items-center gap-2 text-sm text-[#8ddcff] hover:text-[#b9edff] transition-colors break-all"
+                                    className="inline-flex items-center text-sm text-[#8ddcff] hover:text-[#b9edff] transition-colors break-all"
                                   >
-                                    <Download className="w-4 h-4" />
                                     {file.fileName}
                                   </a>
                                 ))}
