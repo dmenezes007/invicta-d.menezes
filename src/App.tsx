@@ -11,6 +11,8 @@ import { ScheduleMeeting } from './components/ScheduleMeeting';
 import { Blog } from './components/Blog';
 import { ClientPortal } from './components/ClientPortal';
 import { AdminPanel } from './components/AdminPanel';
+import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
+import { TermsOfUsePage } from './components/TermsOfUsePage';
 import { ClientSlug } from './lib/clientProgress';
 
 const DashboardImpact = lazy(() =>
@@ -46,6 +48,8 @@ export default function App() {
 
   const normalizedPath = window.location.pathname.replace(/\/$/, '') || '/';
   const isAdminPath = normalizedPath === '/admin';
+  const isPrivacyPolicyPath = normalizedPath === '/politica-de-privacidade';
+  const isTermsOfUsePath = normalizedPath === '/termos-de-uso';
   const clientSlug = normalizedPath.slice(1) as ClientSlug;
   const isClientPath = ['caw', 'cm-mc-ba', 'cm-rj-ba', 'cm-ib-ba'].includes(clientSlug);
 
@@ -63,6 +67,14 @@ export default function App() {
 
   if (isAdminPath) {
     return <AdminPanel />;
+  }
+
+  if (isPrivacyPolicyPath) {
+    return <PrivacyPolicyPage />;
+  }
+
+  if (isTermsOfUsePath) {
+    return <TermsOfUsePage />;
   }
 
   if (isClientPath) {
