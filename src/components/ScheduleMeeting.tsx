@@ -28,32 +28,77 @@ const oneHourSlots = [
   '16:00 - 17:00',
 ];
 
+// Para envio automático sem ação do solicitante, configure a variável de ambiente
+// VITE_FORMSPREE_ENDPOINT no painel da Vercel (ver .env.example).
+// Sem ela configurada, o formulário abre o cliente de e-mail como fallback.
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT as string | undefined;
+
 export function ScheduleMeeting() {
   const [formData, setFormData] = useState<ScheduleFormData>(initialFormData);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const today = useMemo(() => new Date().toISOString().split('T')[0], []);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError(false);
 
-    const subject = encodeURIComponent(`Agendamento de reunião - ${formData.nome}`);
-    const body = encodeURIComponent(
-      [
-        'Oi, D. Menezes!',
-        '',
-        'Solicito o agendamento de uma reunião com os dados abaixo:',
-        `Nome: ${formData.nome}`,
-        `E-mail: ${formData.email}`,
-        `Órgão/Empresa: ${formData.orgao}`,
-        `Data: ${formData.data}`,
-        `Horário (1h): ${formData.horario}`,
-        `Pauta: ${formData.pauta}`,
-      ].join('\n'),
-    );
+    if (!FORMSPREE_ENDPOINT) {
+      // Fallback: abre o cliente de e-mail do dispositivo com os dados preenchidos
+      const subject = encodeURIComponent(`Agendamento de reunião - ${formData.nome}`);
+      const body = encodeURIComponent(
+        [
+          'Oi, D. Menezes!',
+          '',
+          'Solicito o agendamento de uma reunião com os dados abaixo:',
+          `Nome: ${formData.nome}`,
+          `E-mail para contato: ${formData.email}`,
+          `Órgão/Empresa: ${formData.orgao}`,
+          `Data: ${formData.data}`,
+          `Horário (1h): ${formData.horario}`,
+          `Pauta: ${formData.pauta}`,
+        ].join('\n'),
+      );
+      window.location.href = `mailto:davison.menezes@gmail.com?subject=${subject}&body=${body}`;
+      setSubmitted(true);
+      setIsSubmitting(false);
+      return;
+    }
 
-    window.location.href = `mailto:davison.menezes@gmail.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          // _replyto direciona respostas ao e-mail do solicitante
+          _replyto: formData.email,
+          _subject: `Agendamento de reunião - ${formData.nome}`,
+          nome: formData.nome,
+          'e-mail-de-contato': formData.email,
+          orgao_empresa: formData.orgao,
+          data: formData.data,
+          horario: formData.horario,
+          pauta: formData.pauta,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData(initialFormData);
+      } else {
+        setSubmitError(true);
+      }
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -67,7 +112,7 @@ export function ScheduleMeeting() {
             Agende uma reunião de <span className="text-gradient">1 hora</span>
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Selecione data e horário, preencha seus dados e enviaremos automaticamente sua solicitação para o e-mail de atendimento.
+            Selecione a data e horário da sua preferência, preencha os dados, informe seu melhor e-mail de contato e envie a sua solicitação de atendimento.
           </p>
         </div>
 
@@ -156,9 +201,10 @@ export function ScheduleMeeting() {
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary hover:bg-primary/90 text-white font-medium transition-all"
+                disabled={isSubmitting}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary hover:bg-primary/90 text-white font-medium transition-all disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Enviar solicitação por e-mail
+                {isSubmitting ? 'Enviando…' : 'Enviar solicitação'}
               </button>
               <a
                 href="#topo"
@@ -170,7 +216,13 @@ export function ScheduleMeeting() {
 
             {submitted && (
               <p className="text-sm text-accent">
-                Seu cliente de e-mail foi acionado com a mensagem pronta para envio.
+                ✓ Solicitação enviada com sucesso! Em breve entraremos em contato.
+              </p>
+            )}
+
+            {submitError && (
+              <p className="text-sm text-red-400">
+                Não foi possível enviar a solicitação. Por favor, tente novamente ou entre em contato pelo WhatsApp.
               </p>
             )}
           </form>
