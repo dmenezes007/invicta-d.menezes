@@ -27,13 +27,18 @@ export function CTA() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary hover:bg-primary/90 text-white font-medium transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]">
+            <a
+              href="https://wa.me/5521981125585?text=Oi%2C%20D.%20Menezes!"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary hover:bg-primary/90 text-white font-medium transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+            >
               Solicitar Consultoria
               <ArrowRight className="w-5 h-5" />
-            </button>
-            <button className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium transition-all">
+            </a>
+            <a href="#agendamento" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium transition-all">
               Agendar Reunião
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>

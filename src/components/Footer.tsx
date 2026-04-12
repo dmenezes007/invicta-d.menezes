@@ -11,7 +11,7 @@ export function Footer() {
                 <Shield className="w-6 h-6 text-primary" />
               </div>
               <span className="font-display font-bold text-xl tracking-tight">
-                Nexus<span className="text-primary">Privacy</span>
+                D.Menezes<span className="text-primary">Privacy</span>
               </span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
@@ -42,18 +42,18 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-6">Contato</h4>
             <ul className="space-y-4 text-sm text-gray-400">
-              <li><a href="mailto:contato@nexusprivacy.gov.br" className="hover:text-primary transition-colors">contato@nexusprivacy.gov.br</a></li>
-              <li><a href="tel:+556130000000" className="hover:text-primary transition-colors">+55 (61) 3000-0000</a></li>
-              <li>Brasília, DF - Brasil</li>
+              <li><a href="mailto:davison.menezes@gmail.com" className="hover:text-primary transition-colors">davison.menezes@gmail.com</a></li>
+              <li><a href="https://wa.me/5521981125585?text=Oi%2C%20D.%20Menezes!" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">+55 (21) 98112-5585 - WhatsApp</a></li>
+              <li>Rio de Janeiro, RJ - Brasil</li>
             </ul>
           </div>
         </div>
         
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <p>© {new Date().getFullYear()} Nexus Privacy. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} D.Menezes Privacy. Todos os direitos reservados.</p>
           <div className="flex gap-6">
-            <a href="mailto:contato@nexusprivacy.gov.br?subject=Solicita%C3%A7%C3%A3o%20-%20Pol%C3%ADtica%20de%20Privacidade" className="hover:text-white transition-colors">Política de Privacidade</a>
-            <a href="mailto:contato@nexusprivacy.gov.br?subject=Solicita%C3%A7%C3%A3o%20-%20Termos%20de%20Uso" className="hover:text-white transition-colors">Termos de Uso</a>
+            <a href="mailto:davison.menezes@gmail.com?subject=Solicita%C3%A7%C3%A3o%20-%20Pol%C3%ADtica%20de%20Privacidade" className="hover:text-white transition-colors">Política de Privacidade</a>
+            <a href="mailto:davison.menezes@gmail.com?subject=Solicita%C3%A7%C3%A3o%20-%20Termos%20de%20Uso" className="hover:text-white transition-colors">Termos de Uso</a>
           </div>
         </div>
       </div>

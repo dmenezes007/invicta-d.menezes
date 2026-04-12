@@ -33,7 +33,9 @@ export function Hero() {
             
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="#contato"
+                href="https://wa.me/5521981125585?text=Oi%2C%20D.%20Menezes!"
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary hover:bg-primary/90 text-white font-medium transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
               >
                 Solicitar Diagnóstico
@@ -62,7 +64,7 @@ export function Hero() {
                   <div className="w-3 h-3 rounded-full bg-yellow-500" />
                   <div className="w-3 h-3 rounded-full bg-green-500" />
                 </div>
-                <span className="text-xs text-gray-500 font-mono">nexus_compliance_v2.0</span>
+                <span className="text-xs text-gray-500 font-mono">dmenezes_compliance_v2.0</span>
               </div>
               
               <div className="space-y-6">

@@ -35,7 +35,7 @@ export function Navbar() {
             <Shield className="w-6 h-6 text-primary" />
           </div>
           <span className="font-display font-bold text-xl tracking-tight">
-            Nexus<span className="text-primary">Privacy</span>
+            D.Menezes<span className="text-primary">Privacy</span>
           </span>
         </a>
 

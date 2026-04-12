@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -7,6 +7,7 @@ import { Solutions } from './components/Solutions';
 import { Methodology } from './components/Methodology';
 import { CTA } from './components/CTA';
 import { Footer } from './components/Footer';
+import { ScheduleMeeting } from './components/ScheduleMeeting';
 
 const DashboardImpact = lazy(() =>
   import('./components/DashboardImpact').then((module) => ({
@@ -37,24 +38,43 @@ function SectionFallback({ id }: { id: string }) {
 }
 
 export default function App() {
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const isSchedulePage = currentHash === '#agendamento';
+
   return (
     <div id="topo" className="min-h-screen bg-background text-gray-100 selection:bg-primary/30 selection:text-white">
       <Navbar />
       <main>
-        <Hero />
-        <Problems />
-        <Solutions />
-        <Suspense fallback={<SectionFallback id="impacto" />}>
-          <DashboardImpact />
-        </Suspense>
-        <Methodology />
-        <Suspense fallback={<SectionFallback id="prova-social" />}>
-          <SocialProof />
-        </Suspense>
-        <Suspense fallback={<SectionFallback id="conteudo" />}>
-          <Education />
-        </Suspense>
-        <CTA />
+        {isSchedulePage ? (
+          <ScheduleMeeting />
+        ) : (
+          <>
+            <Hero />
+            <Problems />
+            <Solutions />
+            <Suspense fallback={<SectionFallback id="impacto" />}>
+              <DashboardImpact />
+            </Suspense>
+            <Methodology />
+            <Suspense fallback={<SectionFallback id="prova-social" />}>
+              <SocialProof />
+            </Suspense>
+            <Suspense fallback={<SectionFallback id="conteudo" />}>
+              <Education />
+            </Suspense>
+            <CTA />
+          </>
+        )}
       </main>
       <Footer />
     </div>

@@ -58,10 +58,6 @@ export function SocialProof() {
             <p className="text-xl md:text-2xl font-medium leading-relaxed mb-8">
               "A consultoria transformou nossa visão sobre proteção de dados. O que antes parecia um obstáculo burocrático, hoje é um pilar da nossa governança institucional, trazendo mais segurança para o cidadão e eficiência para nossos processos."
             </p>
-            <div>
-              <p className="font-bold text-lg">Diretor de Tecnologia e Inovação</p>
-              <p className="text-primary text-sm">Autarquia Federal Fictícia</p>
-            </div>
           </div>
         </div>
       </div>
