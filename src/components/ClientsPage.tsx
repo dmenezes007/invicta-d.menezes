@@ -317,15 +317,24 @@ function PublicSectorContent({ onBack }: ContentProps) {
                       {client.stages.map((stage, index) => {
                         const [, stageNumber, stageDescription, stageStatus] =
                           stage.match(/^ETAPA\s+(\d+)\s*-\s*(.+):\s*(.+)$/) ?? [];
+                        const normalizedStageStatus = stageStatus?.toLowerCase() ?? '';
+                        const stageBgClass =
+                          normalizedStageStatus === 'não iniciada'
+                            ? 'bg-[#ff0033]/50'
+                            : normalizedStageStatus === 'incompleta'
+                              ? 'bg-[#ff7a00]/50'
+                              : normalizedStageStatus === 'em andamento'
+                                ? 'bg-[#ffe600]/50'
+                                : normalizedStageStatus === 'concluída'
+                                  ? 'bg-[#00ff66]/50'
+                                  : 'bg-white/10';
 
                         return (
                           <div
                             key={stage}
-                            className={
-                              index < client.stages.length - 1
-                                ? 'border-b border-white/10 pb-2'
-                                : ''
-                            }
+                            className={`${stageBgClass} rounded-lg px-3 py-2 ${
+                              index < client.stages.length - 1 ? 'border-b border-white/10' : ''
+                            }`}
                           >
                             <p className="text-xs font-semibold text-primary tracking-wide">ETAPA {stageNumber}</p>
                             <p className="text-xs text-white leading-relaxed">{stageDescription}</p>
