@@ -303,14 +303,24 @@ function InvictaContent({ onBack }: NavigationProps) {
                         const normalizedStageStatus = stageStatus?.toLowerCase() ?? '';
                         const stageStyle =
                           normalizedStageStatus === 'não iniciada'
-                            ? 'bg-surface-light/60 border border-[#ff4d6d]/80 shadow-[0_0_18px_rgba(255,0,51,0.75)]'
+                            ? 'bg-surface-light/60 border border-[#ff4d6d]/80'
                             : normalizedStageStatus === 'incompleta'
-                              ? 'bg-surface-light/60 border border-[#ffa14d]/80 shadow-[0_0_18px_rgba(255,122,0,0.75)]'
+                              ? 'bg-surface-light/60 border border-[#ffa14d]/80'
                               : normalizedStageStatus === 'em andamento'
-                                ? 'bg-surface-light/60 border border-[#fff066]/90 shadow-[0_0_18px_rgba(255,230,0,0.75)]'
+                                ? 'bg-surface-light/60 border border-[#fff066]/90'
                                 : normalizedStageStatus === 'concluída'
-                                  ? 'bg-surface-light/60 border border-[#66ff99]/90 shadow-[0_0_18px_rgba(0,255,102,0.75)]'
-                                  : 'bg-surface-light/60 border border-white/30 shadow-[0_0_12px_rgba(255,255,255,0.35)]';
+                                  ? 'bg-surface-light/60 border border-[#66ff99]/90'
+                                  : 'bg-surface-light/60 border border-white/30';
+                        const stageGlowColor =
+                          normalizedStageStatus === 'não iniciada'
+                            ? 'rgba(255,0,51,0.75)'
+                            : normalizedStageStatus === 'incompleta'
+                              ? 'rgba(255,122,0,0.75)'
+                              : normalizedStageStatus === 'em andamento'
+                                ? 'rgba(255,230,0,0.75)'
+                                : normalizedStageStatus === 'concluída'
+                                  ? 'rgba(0,255,102,0.75)'
+                                  : 'rgba(255,255,255,0.35)';
                         const stageAccentClass =
                           normalizedStageStatus === 'não iniciada'
                             ? 'bg-[#ff0033]'
@@ -325,7 +335,8 @@ function InvictaContent({ onBack }: NavigationProps) {
                         return (
                           <div
                             key={stage}
-                            className={`${stageStyle} relative overflow-hidden rounded-lg px-3 py-2 ${
+                            style={{ '--stage-glow-color': stageGlowColor } as React.CSSProperties}
+                            className={`${stageStyle} stage-glow-pulse relative overflow-hidden rounded-lg px-3 py-2 ${
                               index < client.stages.length - 1 ? 'border-b border-white/10' : ''
                             }`}
                           >

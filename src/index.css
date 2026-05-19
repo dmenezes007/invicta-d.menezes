@@ -112,6 +112,24 @@ a:focus-visible {
   background-clip: text;
 }
 
+.stage-glow-pulse {
+  box-shadow: 0 0 12px var(--stage-glow-color, rgba(255, 255, 255, 0.35));
+  animation: stage-glow-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes stage-glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 10px var(--stage-glow-color, rgba(255, 255, 255, 0.35));
+  }
+
+  50% {
+    box-shadow:
+      0 0 18px var(--stage-glow-color, rgba(255, 255, 255, 0.35)),
+      0 0 28px var(--stage-glow-color, rgba(255, 255, 255, 0.35));
+  }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
