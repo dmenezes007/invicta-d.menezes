@@ -318,27 +318,27 @@ function PublicSectorContent({ onBack }: ContentProps) {
                         const [, stageNumber, stageDescription, stageStatus] =
                           stage.match(/^ETAPA\s+(\d+)\s*-\s*(.+):\s*(.+)$/) ?? [];
                         const normalizedStageStatus = stageStatus?.toLowerCase() ?? '';
-                        const stageBgClass =
+                        const stageStyle =
                           normalizedStageStatus === 'não iniciada'
-                            ? 'bg-[#ff0033]/50'
+                            ? 'bg-[#ff0033]/70 border border-[#ff4d6d]/80 shadow-[0_0_18px_rgba(255,0,51,0.75)]'
                             : normalizedStageStatus === 'incompleta'
-                              ? 'bg-[#ff7a00]/50'
+                              ? 'bg-[#ff7a00]/70 border border-[#ffa14d]/80 shadow-[0_0_18px_rgba(255,122,0,0.75)]'
                               : normalizedStageStatus === 'em andamento'
-                                ? 'bg-[#ffe600]/50'
+                                ? 'bg-[#ffe600]/70 border border-[#fff066]/90 shadow-[0_0_18px_rgba(255,230,0,0.75)]'
                                 : normalizedStageStatus === 'concluída'
-                                  ? 'bg-[#00ff66]/50'
-                                  : 'bg-white/10';
+                                  ? 'bg-[#00ff66]/70 border border-[#66ff99]/90 shadow-[0_0_18px_rgba(0,255,102,0.75)]'
+                                  : 'bg-white/15 border border-white/30 shadow-[0_0_12px_rgba(255,255,255,0.35)]';
 
                         return (
                           <div
                             key={stage}
-                            className={`${stageBgClass} rounded-lg px-3 py-2 ${
+                            className={`${stageStyle} rounded-lg px-3 py-2 ${
                               index < client.stages.length - 1 ? 'border-b border-white/10' : ''
                             }`}
                           >
-                            <p className="text-xs font-semibold text-primary tracking-wide">ETAPA {stageNumber}</p>
-                            <p className="text-xs text-white leading-relaxed">{stageDescription}</p>
-                            <p className="text-xs text-[#8ddcff] leading-relaxed">{stageStatus}</p>
+                            <p className="text-xs font-bold text-[#7ce6ff] tracking-wide">ETAPA {stageNumber}</p>
+                            <p className="text-xs text-white leading-relaxed font-medium">{stageDescription}</p>
+                            <p className="text-xs text-[#d3f6ff] leading-relaxed font-semibold">{stageStatus}</p>
                           </div>
                         );
                       })}
