@@ -286,18 +286,17 @@ function PublicSectorContent({ onBack }: ContentProps) {
 
                 <div className="space-y-4">
                   <div>
-                    <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">PROTAL</p>
                     <a
                       href={client.portalUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-sm text-[#8ddcff] hover:text-[#b9e8ff] break-all transition-colors"
+                      className="text-xs font-semibold text-primary uppercase tracking-wide hover:text-[#8ddcff] transition-colors"
                     >
-                      Acessar
+                      PORTAL
                     </a>
                   </div>
 
-                  <div>
+                  <div className="pt-3 border-t border-white/10">
                     <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">
                       Ponto Focal
                     </p>
