@@ -320,14 +320,14 @@ function PublicSectorContent({ onBack }: ContentProps) {
                         const normalizedStageStatus = stageStatus?.toLowerCase() ?? '';
                         const stageStyle =
                           normalizedStageStatus === 'não iniciada'
-                            ? 'bg-[#ff0033]/70 border border-[#ff4d6d]/80 shadow-[0_0_18px_rgba(255,0,51,0.75)]'
+                            ? 'bg-surface-light/60 border border-[#ff4d6d]/80 shadow-[0_0_18px_rgba(255,0,51,0.75)]'
                             : normalizedStageStatus === 'incompleta'
-                              ? 'bg-[#ff7a00]/70 border border-[#ffa14d]/80 shadow-[0_0_18px_rgba(255,122,0,0.75)]'
+                              ? 'bg-surface-light/60 border border-[#ffa14d]/80 shadow-[0_0_18px_rgba(255,122,0,0.75)]'
                               : normalizedStageStatus === 'em andamento'
-                                ? 'bg-[#ffe600]/70 border border-[#fff066]/90 shadow-[0_0_18px_rgba(255,230,0,0.75)]'
+                                ? 'bg-surface-light/60 border border-[#fff066]/90 shadow-[0_0_18px_rgba(255,230,0,0.75)]'
                                 : normalizedStageStatus === 'concluída'
-                                  ? 'bg-[#00ff66]/70 border border-[#66ff99]/90 shadow-[0_0_18px_rgba(0,255,102,0.75)]'
-                                  : 'bg-white/15 border border-white/30 shadow-[0_0_12px_rgba(255,255,255,0.35)]';
+                                  ? 'bg-surface-light/60 border border-[#66ff99]/90 shadow-[0_0_18px_rgba(0,255,102,0.75)]'
+                                  : 'bg-surface-light/60 border border-white/30 shadow-[0_0_12px_rgba(255,255,255,0.35)]';
                         const stageAccentClass =
                           normalizedStageStatus === 'não iniciada'
                             ? 'bg-[#ff0033]'
