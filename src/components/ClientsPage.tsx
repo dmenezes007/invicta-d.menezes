@@ -314,13 +314,26 @@ function PublicSectorContent({ onBack }: ContentProps) {
                   </div>
 
                   <div className="pt-3 border-t border-white/10">
-                    <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">ETAPA</p>
-                    <div className="space-y-1">
-                      {client.stages.map((stage) => (
-                        <p key={stage} className="text-xs text-gray-300 leading-relaxed">
-                          {stage}
-                        </p>
-                      ))}
+                    <div className="space-y-2">
+                      {client.stages.map((stage, index) => {
+                        const [, stageNumber, stageDescription, stageStatus] =
+                          stage.match(/^ETAPA\s+(\d+)\s*-\s*(.+):\s*(.+)$/) ?? [];
+
+                        return (
+                          <div
+                            key={stage}
+                            className={
+                              index < client.stages.length - 1
+                                ? 'border-b border-white/10 pb-2'
+                                : ''
+                            }
+                          >
+                            <p className="text-xs font-semibold text-primary tracking-wide">ETAPA {stageNumber}</p>
+                            <p className="text-xs text-white leading-relaxed">{stageDescription}</p>
+                            <p className="text-xs text-[#8ddcff] leading-relaxed">{stageStatus}</p>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
