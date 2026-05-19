@@ -193,34 +193,71 @@ function PublicSectorContent({ onBack }: ContentProps) {
     {
       name: 'Câmara Municipal de Morro do Chapéu',
       state: 'BA',
+      portalUrl: 'https://www.camaramorrodochapeu.ba.gov.br/portal/index.php/portal/transparencia',
       contactPerson: 'Flávia Oliveira de Souza',
       contactPhone: '(73) 9910-5860',
       dpo: 'Flávia Oliveira de Souza',
       dpoPhone: '(74) 9910-5860',
+      stages: [
+        'ETAPA 0 - Definição de Papéis: Incompleta',
+        'ETAPA 1 - Mapeamento e Base de Evidências: Em Andamento',
+        'ETAPA 2 - Governança Institucional: Em Andamento',
+        'ETAPA 3 - Transparência por Processo de Negócio: Não Iniciada',
+        'ETAPA 4 - Segurança da Informação: Não Iniciada',
+        'ETAPA 5 - Resposta e Melhoria Contínua: Não Iniciada',
+      ],
     },
     {
       name: 'Câmara Municipal de Riachão do Jacuípe',
       state: 'BA',
+      portalUrl: 'https://transparencia.camaraderiachaodojacuipe.ba.gov.br/homepage',
       contactPerson: 'Roberto',
       contactPhone: '(75) 8172-2107',
       dpo: 'Eliziane Carneiro de Santana',
       dpoPhone: 'Não conhecido',
+      stages: [
+        'ETAPA 0 - Definição de Papéis: Incompleta',
+        'ETAPA 1 - Mapeamento e Base de Evidências: Em Andamento',
+        'ETAPA 2 - Governança Institucional: Em Andamento',
+        'ETAPA 3 - Transparência por Processo de Negócio: Não Iniciada',
+        'ETAPA 4 - Segurança da Informação: Não Iniciada',
+        'ETAPA 5 - Resposta e Melhoria Contínua: Não Iniciada',
+      ],
     },
     {
       name: 'Câmara Municipal de Ibirapitanga',
       state: 'BA',
+      portalUrl:
+        'https://www.airdoc.com.br/PORTALMUNICIPIO/ba/cmibirapitanga/home?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGnqPK9zYQxZ7y0YqDOqXLi6eWNFDHjcknWUzkCthKJtnlZiibOufTJmErhSFE_aem_iVF9tNH1HIx_D075h7jizg',
       contactPerson: 'Maiane Santos',
       contactPhone: '(73) 8133-1100',
       dpo: 'Maiane Santos',
       dpoPhone: '(73) 8133-1100',
+      stages: [
+        'ETAPA 0 - Definição de Papéis: Incompleta',
+        'ETAPA 1 - Mapeamento e Base de Evidências: Não Iniciada',
+        'ETAPA 2 - Governança Institucional: Não Iniciada',
+        'ETAPA 3 - Transparência por Processo de Negócio: Não Iniciada',
+        'ETAPA 4 - Segurança da Informação: Não Iniciada',
+        'ETAPA 5 - Resposta e Melhoria Contínua: Não Iniciada',
+      ],
     },
     {
       name: 'Câmara Municipal de Maraú',
       state: 'BA',
+      portalUrl: 'https://cmmarau-ba.portaltp.com.br/',
       contactPerson: 'Jucy',
       contactPhone: '(73) 9849-5744',
       dpo: 'Não conhecido',
       dpoPhone: 'Não conhecido',
+      stages: [
+        'ETAPA 0 - Definição de Papéis: Não Iniciada',
+        'ETAPA 1 - Mapeamento e Base de Evidências: Não Iniciada',
+        'ETAPA 2 - Governança Institucional: Não Iniciada',
+        'ETAPA 3 - Transparência por Processo de Negócio: Não Iniciada',
+        'ETAPA 4 - Segurança da Informação: Não Iniciada',
+        'ETAPA 5 - Resposta e Melhoria Contínua: Não Iniciada',
+      ],
     },
   ];
 
@@ -249,6 +286,18 @@ function PublicSectorContent({ onBack }: ContentProps) {
 
                 <div className="space-y-4">
                   <div>
+                    <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">PROTAL</p>
+                    <a
+                      href={client.portalUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-sm text-[#8ddcff] hover:text-[#b9e8ff] break-all transition-colors"
+                    >
+                      Acessar
+                    </a>
+                  </div>
+
+                  <div>
                     <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">
                       Ponto Focal
                     </p>
@@ -262,6 +311,17 @@ function PublicSectorContent({ onBack }: ContentProps) {
                     </p>
                     <p className="text-sm text-gray-300">{client.dpo}</p>
                     <p className="text-sm text-[#8ddcff]">{client.dpoPhone}</p>
+                  </div>
+
+                  <div className="pt-3 border-t border-white/10">
+                    <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">ETAPA</p>
+                    <div className="space-y-1">
+                      {client.stages.map((stage) => (
+                        <p key={stage} className="text-xs text-gray-300 leading-relaxed">
+                          {stage}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
