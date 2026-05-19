@@ -328,6 +328,16 @@ function PublicSectorContent({ onBack }: ContentProps) {
                                 : normalizedStageStatus === 'concluída'
                                   ? 'bg-[#00ff66]/70 border border-[#66ff99]/90 shadow-[0_0_18px_rgba(0,255,102,0.75)]'
                                   : 'bg-white/15 border border-white/30 shadow-[0_0_12px_rgba(255,255,255,0.35)]';
+                        const isInProgress = normalizedStageStatus === 'em andamento';
+                        const stageNumberClass = isInProgress
+                          ? 'text-black'
+                          : 'text-[#7ce6ff]';
+                        const stageDescriptionClass = isInProgress
+                          ? 'text-[#101010]'
+                          : 'text-white';
+                        const stageStatusClass = isInProgress
+                          ? 'text-[#2d2d2d]'
+                          : 'text-[#d3f6ff]';
 
                         return (
                           <div
@@ -336,9 +346,15 @@ function PublicSectorContent({ onBack }: ContentProps) {
                               index < client.stages.length - 1 ? 'border-b border-white/10' : ''
                             }`}
                           >
-                            <p className="text-xs font-bold text-[#7ce6ff] tracking-wide">ETAPA {stageNumber}</p>
-                            <p className="text-xs text-white leading-relaxed font-medium">{stageDescription}</p>
-                            <p className="text-xs text-[#d3f6ff] leading-relaxed font-semibold">{stageStatus}</p>
+                            <p className={`text-xs font-bold tracking-wide ${stageNumberClass}`}>
+                              ETAPA {stageNumber}
+                            </p>
+                            <p className={`text-xs leading-relaxed font-medium ${stageDescriptionClass}`}>
+                              {stageDescription}
+                            </p>
+                            <p className={`text-xs leading-relaxed font-semibold ${stageStatusClass}`}>
+                              {stageStatus}
+                            </p>
                           </div>
                         );
                       })}
