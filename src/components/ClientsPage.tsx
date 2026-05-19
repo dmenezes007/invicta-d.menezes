@@ -100,7 +100,7 @@ export function ClientsPage() {
                   </div>
                   <h2 className="text-2xl font-bold">INPI</h2>
                 </div>
-                <p className="text-gray-400">Área interna INPI</p>
+                <p className="text-gray-400">Área Interna INPI</p>
               </button>
 
               <button
@@ -113,7 +113,7 @@ export function ClientsPage() {
                   </div>
                   <h2 className="text-2xl font-bold">INVICTA</h2>
                 </div>
-                <p className="text-gray-400">Câmaras municipais e órgãos públicos</p>
+                <p className="text-gray-400">Área Interna INVICTA</p>
               </button>
 
               <button
@@ -126,7 +126,7 @@ export function ClientsPage() {
                   </div>
                   <h2 className="text-2xl font-bold">CAW</h2>
                 </div>
-                <p className="text-gray-400">Área interna CAW</p>
+                <p className="text-gray-400">Área Interna CAW</p>
               </button>
             </div>
           </div>
