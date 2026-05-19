@@ -328,31 +328,35 @@ function PublicSectorContent({ onBack }: ContentProps) {
                                 : normalizedStageStatus === 'concluída'
                                   ? 'bg-[#00ff66]/70 border border-[#66ff99]/90 shadow-[0_0_18px_rgba(0,255,102,0.75)]'
                                   : 'bg-white/15 border border-white/30 shadow-[0_0_12px_rgba(255,255,255,0.35)]';
-                        const isInProgress = normalizedStageStatus === 'em andamento';
-                        const stageNumberClass = isInProgress
-                          ? 'text-black'
-                          : 'text-[#7ce6ff]';
-                        const stageDescriptionClass = isInProgress
-                          ? 'text-[#101010]'
-                          : 'text-white';
-                        const stageStatusClass = isInProgress
-                          ? 'text-[#2d2d2d]'
-                          : 'text-[#d3f6ff]';
+                        const stageAccentClass =
+                          normalizedStageStatus === 'não iniciada'
+                            ? 'bg-[#ff0033]'
+                            : normalizedStageStatus === 'incompleta'
+                              ? 'bg-[#ff7a00]'
+                              : normalizedStageStatus === 'em andamento'
+                                ? 'bg-[#ffe600]'
+                                : normalizedStageStatus === 'concluída'
+                                  ? 'bg-[#00ff66]'
+                                  : 'bg-white/80';
 
                         return (
                           <div
                             key={stage}
-                            className={`${stageStyle} rounded-lg px-3 py-2 ${
+                            className={`${stageStyle} relative overflow-hidden rounded-lg px-3 py-2 ${
                               index < client.stages.length - 1 ? 'border-b border-white/10' : ''
                             }`}
                           >
-                            <p className={`text-xs font-bold tracking-wide ${stageNumberClass}`}>
+                            <span
+                              aria-hidden="true"
+                              className={`${stageAccentClass} absolute left-1 top-1 bottom-1 w-1 rounded-full`}
+                            />
+                            <p className="pl-3 text-xs font-bold tracking-wide text-primary">
                               ETAPA {stageNumber}
                             </p>
-                            <p className={`text-xs leading-relaxed font-medium ${stageDescriptionClass}`}>
+                            <p className="pl-3 text-xs leading-relaxed font-medium text-white">
                               {stageDescription}
                             </p>
-                            <p className={`text-xs leading-relaxed font-semibold ${stageStatusClass}`}>
+                            <p className="pl-3 text-xs leading-relaxed font-semibold text-[#8ddcff]">
                               {stageStatus}
                             </p>
                           </div>
