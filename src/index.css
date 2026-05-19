@@ -113,20 +113,20 @@ a:focus-visible {
 }
 
 .stage-glow-pulse {
-  box-shadow: 0 0 12px var(--stage-glow-color, rgba(255, 255, 255, 0.35));
-  animation: stage-glow-pulse 2.8s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--stage-glow-color, rgba(255, 255, 255, 0.3));
+  animation: stage-glow-pulse 3.6s ease-in-out infinite;
 }
 
 @keyframes stage-glow-pulse {
   0%,
   100% {
-    box-shadow: 0 0 10px var(--stage-glow-color, rgba(255, 255, 255, 0.35));
+    box-shadow: 0 0 7px var(--stage-glow-color, rgba(255, 255, 255, 0.3));
   }
 
   50% {
     box-shadow:
-      0 0 18px var(--stage-glow-color, rgba(255, 255, 255, 0.35)),
-      0 0 28px var(--stage-glow-color, rgba(255, 255, 255, 0.35));
+      0 0 12px var(--stage-glow-color, rgba(255, 255, 255, 0.3)),
+      0 0 18px var(--stage-glow-color, rgba(255, 255, 255, 0.3));
   }
 }
 
