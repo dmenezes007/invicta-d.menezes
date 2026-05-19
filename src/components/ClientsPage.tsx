@@ -252,7 +252,12 @@ function InvictaContent({ onBack }: NavigationProps) {
           </button>
 
           <h1 className="text-3xl md:text-4xl font-bold mb-2">INVICTA</h1>
-          <p className="text-gray-400 mb-12">Câmaras Municipais e Órgãos Públicos</p>
+          <div className="mb-12 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <p className="text-gray-400">Órgãos Públicos Municipais</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+              ÚLTIMA ATUALIZAÇÃO: <span className="text-primary">18/05/2026</span>
+            </p>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {clients.map((client) => (
