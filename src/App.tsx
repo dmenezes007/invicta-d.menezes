@@ -70,11 +70,11 @@ export default function App() {
   if (isAdminPath) {
     return <AdminPanel />;
   }
-ClientsPath) {
+
+  if (isClientsPath) {
     return <ClientsPage />;
   }
 
-  if (is
   if (isPrivacyPolicyPath) {
     return <PrivacyPolicyPage />;
   }
