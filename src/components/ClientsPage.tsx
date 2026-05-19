@@ -347,9 +347,9 @@ function PublicSectorContent({ onBack }: ContentProps) {
                             }`}
                           >
                             <span
-                              aria-hidden="true"
+                              contactPerson: 'Mayane dos Santos Silva',
                               className={`${stageAccentClass} absolute left-1 top-1 bottom-1 w-1 rounded-full`}
-                            />
+                              dpo: 'Mayane dos Santos Silva',
                             <p className="pl-3 text-xs font-bold tracking-wide text-primary">
                               ETAPA {stageNumber}
                             </p>
