@@ -11,6 +11,7 @@ import { ScheduleMeeting } from './components/ScheduleMeeting';
 import { Blog } from './components/Blog';
 import { ClientPortal } from './components/ClientPortal';
 import { AdminPanel } from './components/AdminPanel';
+import { ClientsPage } from './components/ClientsPage';
 import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
 import { TermsOfUsePage } from './components/TermsOfUsePage';
 import { ClientSlug } from './lib/clientProgress';
@@ -48,6 +49,7 @@ export default function App() {
 
   const normalizedPath = window.location.pathname.replace(/\/$/, '') || '/';
   const isAdminPath = normalizedPath === '/admin';
+  const isClientsPath = normalizedPath === '/clientes';
   const isPrivacyPolicyPath = normalizedPath === '/politica-de-privacidade';
   const isTermsOfUsePath = normalizedPath === '/termos-de-uso';
   const clientSlug = normalizedPath.slice(1) as ClientSlug;
@@ -68,7 +70,11 @@ export default function App() {
   if (isAdminPath) {
     return <AdminPanel />;
   }
+ClientsPath) {
+    return <ClientsPage />;
+  }
 
+  if (is
   if (isPrivacyPolicyPath) {
     return <PrivacyPolicyPage />;
   }
