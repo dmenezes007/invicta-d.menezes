@@ -191,10 +191,10 @@ function InvictaContent({ onBack }: NavigationProps) {
     {
       name: 'Câmara Municipal de Riachão do Jacuípe',
       portalUrl: 'https://transparencia.camaraderiachaodojacuipe.ba.gov.br/homepage',
-      contactPerson: 'Roberto',
+      contactPerson: 'Roberto Carlos Guimarães São Paulo',
       contactPhone: '(75) 8172-2107',
       dpo: 'Eliziane Carneiro de Santana',
-      dpoPhone: 'Não conhecido',
+      dpoPhone: '(75) 9277-6079',
       stages: [
         'ETAPA 0 - Definição de Papéis: Incompleta',
         'ETAPA 1 - Mapeamento e Base de Evidências: Em Andamento',
