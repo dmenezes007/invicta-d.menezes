@@ -224,10 +224,10 @@ function InvictaContent({ onBack }: NavigationProps) {
     {
       name: 'Câmara Municipal de Maraú',
       portalUrl: 'https://cmmarau-ba.portaltp.com.br/',
-      contactPerson: 'Jucy',
+      contactPerson: 'Jucileide Ferreira dos Santos',
       contactPhone: '(73) 9849-5744',
-      dpo: 'Não conhecido',
-      dpoPhone: 'Não conhecido',
+      dpo: 'Jucileide Ferreira dos Santos',
+      dpoPhone: '(73) 9849-5744',
       stages: [
         'ETAPA 0 - Definição de Papéis: Não Iniciada',
         'ETAPA 1 - Mapeamento e Base de Evidências: Não Iniciada',
