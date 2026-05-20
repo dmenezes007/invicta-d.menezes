@@ -255,7 +255,7 @@ function InvictaContent({ onBack }: NavigationProps) {
           <div className="mb-12 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
             <p className="text-gray-400">Órgãos Públicos Municipais</p>
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
-              ÚLTIMA ATUALIZAÇÃO: <span className="text-primary">18/05/2026</span>
+              ÚLTIMA ATUALIZAÇÃO: <span className="text-primary">20/05/2026</span>
             </p>
           </div>
 
